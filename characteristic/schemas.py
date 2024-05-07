@@ -7,19 +7,3 @@ import server.src.formula.schemas as formula
 
 
 
-class CharacteristicBase(BaseModel):
-    name: str
-    engine_id: Optional[int] = None
-
-
-class CharacteristicCreate(CharacteristicBase):
-    name: str
-    engine_id: Optional[int] = None
-
-
-class Characteristic(CharacteristicBase):
-    id: int
-    formulas: List[formula.Formula] = []
-
-    class Config:
-        orm_mode = True

@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 import variable.models as models
-import variable.schemas as schemas
+import schemas
 
 
 def get_variable(db: Session, id: int):
