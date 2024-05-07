@@ -2,6 +2,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 import database
+from ref_tables.models import *
 
 class Engine(database.Base):
     __tablename__ = 'engines'

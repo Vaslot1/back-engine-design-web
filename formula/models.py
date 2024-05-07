@@ -1,7 +1,9 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from server.src import database
+import database
+from ref_tables.models import *
+from characteristic.models import *
 class Formula(database.Base):
     __tablename__ = 'formula'
 
