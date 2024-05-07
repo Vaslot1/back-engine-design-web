@@ -1,6 +1,6 @@
 from fastapi import Depends, HTTPException, APIRouter
 from sqlalchemy.orm import Session
-
+from typing import List
 import variable.controller as controller
 import schemas
 from database import get_db
@@ -16,7 +16,7 @@ def create_variable(variable: schemas.VariableCreate, db: Session = Depends(get_
     return controller.create_variable(db=db, variable=variable)
 
 
-@router.get("/variables/", response_model=list[schemas.Variable])
+@router.get("/variables/", response_model=List[schemas.Variable])
 def read_variables(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     variables = controller.get_variables(db, skip=skip, limit=limit)
     return variables

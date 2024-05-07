@@ -14,6 +14,6 @@ class Variant(database.Base):
     solved = Column(Boolean)
     slide = Column(Float)
     class_hr = Column(String(1))
-    engine_id = Column(Integer, ForeignKey('engines.id'))
-    engine = relationship("Engine", back_populates="variants")
+    engine = Column(Integer, ForeignKey('engines.id'))
+    engine_obj = relationship("Engine", back_populates="variants")
     users = relationship("User", secondary="variants_users", back_populates="variants")

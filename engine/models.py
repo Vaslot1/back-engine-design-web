@@ -9,4 +9,4 @@ class Engine(database.Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(150), nullable=False)
-    variants = relationship("Variant", back_populates="engine")
+    variants = relationship("Variant", back_populates="engine_obj")

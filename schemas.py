@@ -38,6 +38,7 @@ class UserCreate(UserBase):
 
 class User(UserBase):
     id: int
+    variants: List['Variant'] = deferred([])
 
     class Config:
         orm_mode = True
@@ -60,12 +61,12 @@ class VariantCreate(VariantBase):
     solved: Optional[bool] = None
     slide: Optional[float] = None
     class_hr: Optional[str] = None
-    engine_id: Optional[int] = None
+    engine: Optional[int] = None
 
 
 class Variant(VariantBase):
     id: int
-    # engine: Optional[Engine] = None
+    engine_obj: Optional[Engine] = None
     users: List[User] = []
 
     class Config:
