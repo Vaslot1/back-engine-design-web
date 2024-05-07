@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship
 import database
 from ref_tables.models import *
 from characteristic.models import *
+
 class Formula(database.Base):
     __tablename__ = 'formula'
 
