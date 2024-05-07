@@ -86,7 +86,7 @@ class FormulaCreate(FormulaBase):
 
 class Formula(FormulaBase):
     id: int
-    variables: List['Variable'] = deferred([])
+    # variables: List['Variable'] = deferred([])
 
     class Config:
         orm_mode = True
