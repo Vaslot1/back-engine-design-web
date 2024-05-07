@@ -8,6 +8,7 @@ from user.router import router as router_user
 from variable.router import router as router_variable
 from engine.router import router as router_engine
 from variant.router import router as router_variant
+from formula.router import router as router_formula
 
 Base.metadata.create_all(bind=engine)
 
@@ -16,6 +17,8 @@ app.include_router(router_user)
 app.include_router(router_variable)
 app.include_router(router_engine)
 app.include_router(router_variant)
+app.include_router(router_formula)
+
 
 
 

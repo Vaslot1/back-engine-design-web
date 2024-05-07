@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String,Float
 from sqlalchemy.orm import relationship
 
 import database
@@ -20,10 +20,12 @@ class VariableFormula(database.Base):
     __tablename__ = 'variable_formula'
 
     id_variable = Column(Integer, ForeignKey('variables.id'), primary_key=True)
-    id_formula = Column(Integer, ForeignKey('formula.id'), primary_key=True)
-    variable = relationship("Variable", backref="related_formulas", overlaps="formula,variables")
-    formula = relationship("Formula", backref="related_variables", overlaps="formula,variables")
-
+    id_formula = Column(Integer, ForeignKey('formulas.id'), primary_key=True)
+    # user_id = Column(Integer, ForeignKey('users.id'), primary_key=True)
+    # value = Column(Float)
+    # variable = relationship("Variable", backref="formulas")
+    # formula = relationship("Formula", backref="variables")
+    # user = relationship("User", backref="users")
 class VariantUser(database.Base):
     __tablename__ = 'variants_users'
 

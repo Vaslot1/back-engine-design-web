@@ -12,5 +12,5 @@ class Formula(database.Base):
     string_res = Column(String(50))
     number = Column(Integer)
     dim = Column(String(10))
-    variables = relationship("Variable", secondary="variable_formula", back_populates="formula")
+    # variables = relationship("Variable", secondary="variable_formula", back_populates="formula")
     characteristics = relationship("Characteristic", secondary="characteristic_formulas", back_populates="formula")

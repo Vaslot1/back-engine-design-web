@@ -10,4 +10,5 @@ class Variable(database.Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     short_name = Column(String(25), nullable=False)
-    formula = relationship("Formula", secondary="variable_formula", back_populates="variables")
+    # formulas = relationship("Formula", secondary="variable_formula", back_populates="variables")
+    # users = relationship("User", secondary="variable_formula", back_populates="variables")
