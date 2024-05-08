@@ -14,4 +14,3 @@ class User(database.Base):
     user_group = Column(String(20))
     role = Column(String(10))
     variants = relationship("Variant", secondary="variants_users", back_populates="users")
-    # variables = relationship("Variable", secondary="variable_formula", back_populates="users")

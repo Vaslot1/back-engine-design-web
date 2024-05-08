@@ -9,5 +9,5 @@ class Characteristic(database.Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(200), nullable=False)
-    engine = Column(Integer, ForeignKey('engines.id'))
+    engine_id = Column(Integer, ForeignKey('engines.id'), nullable=False)
     formulas = relationship("Formula", back_populates="characteristic")

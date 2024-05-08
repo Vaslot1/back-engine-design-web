@@ -6,7 +6,7 @@ from ref_tables.models import *
 from characteristic.models import *
 
 class Formula(database.Base):
-    __tablename__ = 'formula'
+    __tablename__ = 'formulas'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     string_res = Column(String(50))
