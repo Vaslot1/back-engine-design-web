@@ -1,6 +1,14 @@
+import re
+from typing import List
+
 from sqlalchemy.orm import Session
 
 import ref_tables.models as models
+
+from formula.models import Formula
+from variant.models import Variant
+from characteristic.models import Characteristic
+from var_initial_data.models import Var_initial_data
 import schemas
 
 
@@ -23,3 +31,42 @@ def create_variant_user(db: Session, variant_user: schemas.VariantUserCreate):
     db.commit()
     db.refresh(db_variant_user)
     return db_variant_user
+
+def get_formulas_by_variant_id(db: Session):
+    return db.query(models.VariantUser).all()
+
+
+
+def get_string_res_by_variant_id(db: Session, id_variant: int):
+    return (
+        db.query(Formula)
+        .join(Characteristic)
+        .filter(Characteristic.engine_id == Variant.engine)
+        .filter(Characteristic.formulas.any(Formula.id_char == Characteristic.id))
+        .filter(Variant.id == id_variant)
+        .all()
+    )
+
+def create_vars_initial_data_from_formulas(db: Session, formulas: List[Formula],id_variant_user: int):
+    def extract_variables_from_expression(expression):
+        regex = r"[a-zA-Zа-яА-Я_'()][a-zA-Zа-яА-Я0-9_'()]*"
+        variables = re.findall(regex, expression)
+        func = variables[0]
+        equals = set(var for index, var in enumerate(variables) if index != 0)
+        return func, equals
+
+    calculated_variables = set()
+    initial_variables = set()
+
+    for item in formulas:
+        string_res = item["string_res"]
+        func, equals = extract_variables_from_expression(string_res)
+        calculated_variables.add(func)
+        initial_variables.update(equals - calculated_variables)
+
+    for var in initial_variables:
+        db_VarInitialData = Var_initial_data(short_name=var, value=None,
+                                                    id_variant_user=id_variant_user)
+        db.add(db_VarInitialData)
+        db.commit()
+        db.refresh(db_VarInitialData)

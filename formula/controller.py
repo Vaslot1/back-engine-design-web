@@ -17,7 +17,7 @@ def get_formulas(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_formula(db: Session, formula: schemas.FormulaCreate):
-    db_formula = models.Formula(string_res=formula.string_res, number=formula.number, dim=formula.dim)
+    db_formula = models.Formula(string_res=formula.string_res, number=formula.number, dim=formula.dim, id_char=formula.id_char)
     db.add(db_formula)
     db.commit()
     db.refresh(db_formula)

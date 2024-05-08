@@ -72,7 +72,7 @@ class FormulaCreate(FormulaBase):
     string_res: Optional[str] = None
     number: Optional[int] = None
     dim: Optional[str] = None
-    id_char:Optional[int] = None
+    id_char: int
 
 
 class Formula(FormulaBase):
