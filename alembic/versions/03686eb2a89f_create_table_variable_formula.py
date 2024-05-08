@@ -19,12 +19,14 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade():
-    op.create_table(
-        'variable_formula',
-        sa.Column('id_variable', sa.Integer, sa.ForeignKey('variables.id'), primary_key=True),
-        sa.Column('id_formula', sa.Integer, sa.ForeignKey('formula.id'), primary_key=True),
-        sa.UniqueConstraint('id_variable', 'id_formula')
-    )
+    pass
+    # op.create_table(
+    #     'variable_formula',
+    #     sa.Column('id_variable', sa.Integer, sa.ForeignKey('variables.id'), primary_key=True),
+    #     sa.Column('id_formula', sa.Integer, sa.ForeignKey('formula.id'), primary_key=True),
+    #     sa.UniqueConstraint('id_variable', 'id_formula')
+    # )
 
 def downgrade():
-    op.drop_table('variable_formula')
+    pass
+    # op.drop_table('variable_formula')

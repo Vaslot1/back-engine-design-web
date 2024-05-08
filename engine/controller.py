@@ -16,7 +16,7 @@ def get_engines(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Engine).offset(skip).limit(limit).all()
 
 
-def create_user(db: Session, engine: schemas.EngineCreate):
+def create_engine(db: Session, engine: schemas.EngineCreate):
     db_engine = models.Engine(name=engine.name)
     db.add(db_engine)
     db.commit()

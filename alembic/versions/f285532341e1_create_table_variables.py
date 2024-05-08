@@ -19,13 +19,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade():
-    op.create_table(
-        'variables',
-        sa.Column('id', sa.Integer, primary_key=True, autoincrement=True),
-        sa.Column('short_name', sa.String(25), nullable=False),
-        sa.Column('calculated', sa.Boolean, nullable=False),
-        sa.UniqueConstraint('id')
-    )
+    pass
 
 def downgrade():
-    op.drop_table('variables')
+    pass

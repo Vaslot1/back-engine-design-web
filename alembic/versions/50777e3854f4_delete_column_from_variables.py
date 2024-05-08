@@ -19,8 +19,10 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade():
-    op.drop_column('variables', 'calculated')
+    pass
+    # op.drop_column('variables', 'calculated')
 
 
-def downgrade():
-    op.add_column('variables', sa.Column('calculated',sa.Boolean, nullable=False))
+def downgrade() -> None:
+    pass
+    # op.add_column('variables', sa.Column('calculated',sa.Boolean, nullable=False))

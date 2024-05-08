@@ -7,20 +7,8 @@ from sqlalchemy.orm import deferred
 
 
 #######################################################Engine
-class EngineBase(BaseModel):
-    name: str
 
 
-class EngineCreate(EngineBase):
-    name: str
-
-
-class Engine(EngineBase):
-    id: int
-    # variants: List['Variant'] = deferred([])
-
-    class Config:
-        orm_mode = True
 #######################################################User
 class UserBase(BaseModel):
     full_name: str
@@ -66,8 +54,9 @@ class VariantCreate(VariantBase):
 
 class Variant(VariantBase):
     id: int
-    engine_obj: Optional[Engine] = None
+    engine_obj: 'Engine'
     users: List[User] = []
+    vars_initial_data: List['VarInitialData'] = None
 
     class Config:
         orm_mode = True
@@ -76,12 +65,14 @@ class FormulaBase(BaseModel):
     string_res: Optional[str] = None
     number: Optional[int] = None
     dim: Optional[str] = None
+    id_char:Optional[int] = None
 
 
 class FormulaCreate(FormulaBase):
     string_res: Optional[str] = None
     number: Optional[int] = None
     dim: Optional[str] = None
+    id_char:Optional[int] = None
 
 
 class Formula(FormulaBase):
@@ -93,16 +84,22 @@ class Formula(FormulaBase):
 
 
 #######################################################Variable
-class VariableBase(BaseModel):
+class VarInitialDataBase(BaseModel):
     short_name: str
+    value: float
+    id_variant_user: int
 
 
-class VariableCreate(VariableBase):
+class VarInitialDataCreate(VarInitialDataBase):
     short_name: str
+    value: float
+    id_variant_user: int
 
 
-class Variable(VariableBase):
+class VarInitialData(VarInitialDataBase):
     id: int
+    value: float
+    id_variant_user: int
 
 
     class Config:
@@ -121,7 +118,24 @@ class CharacteristicCreate(CharacteristicBase):
 
 class Characteristic(CharacteristicBase):
     id: int
+    engine_id: int
     formulas: List[Formula] = []
 
     class Config:
         orm_mode = True
+
+class EngineBase(BaseModel):
+    name: str
+
+
+class EngineCreate(EngineBase):
+    name: str
+
+
+class Engine(EngineBase):
+    id: int
+    characteristics: List[Characteristic] = []
+
+    class Config:
+        orm_mode = True
+

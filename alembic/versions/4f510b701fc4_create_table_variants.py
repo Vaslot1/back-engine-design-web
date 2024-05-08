@@ -19,18 +19,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade():
-    op.create_table(
-        'variants',
-        sa.Column('id', sa.Integer, primary_key=True, autoincrement=True),
-        sa.Column('voltage', float),
-        sa.Column('power', float),
-        sa.Column('cnt_pole', sa.Integer),
-        sa.Column('solved', sa.Boolean),
-        sa.Column('slide', float),
-        sa.Column('class_hr', sa.String(1)),
-        sa.Column('engine', sa.Integer, sa.ForeignKey('engines.id')),
-        sa.UniqueConstraint('id')
-    )
+    pass
 
 def downgrade():
-    op.drop_table('variants')
+    pass

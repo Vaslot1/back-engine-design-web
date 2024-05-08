@@ -13,7 +13,7 @@ def create_engine(engine: schemas.EngineCreate, db: Session = Depends(get_db)):
     db_engine = controller.get_engine_by_name(db, name=engine.name)
     if db_engine:
         raise HTTPException(status_code=400, detail="short_name already registered")
-    return controller.create_user(db=db, engine=engine)
+    return controller.create_engine(db=db, engine=engine)
 
 
 @router.get("/engines/", response_model=List[schemas.Engine])

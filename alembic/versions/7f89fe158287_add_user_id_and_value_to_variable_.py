@@ -19,11 +19,13 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade():
-    op.add_column('variable_formula', sa.Column("user_id", sa.Integer, nullable=False,
-                primary_key=True))
-    op.add_column('variable_formula', sa.Column("value", sa.Float))
+    pass
+    # op.add_column('variable_formula', sa.Column("user_id", sa.Integer, nullable=False,
+    #             primary_key=True))
+    # op.add_column('variable_formula', sa.Column("value", sa.Float))
 
 
 def downgrade():
-    op.drop_column('variable_formula', 'user_id')
-    op.drop_column('variable_formula', 'value')
+    pass
+    # op.drop_column('variable_formula', 'user_id')
+    # op.drop_column('variable_formula', 'value')

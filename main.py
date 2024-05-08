@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Base
 
 from user.router import router as router_user
-from variable.router import router as router_variable
+from var_initial_data.router import router as router_variable
 from engine.router import router as router_engine
 from variant.router import router as router_variant
 from formula.router import router as router_formula
