@@ -11,7 +11,7 @@ from formula.models import *
 
 class VariantUser(database.Base):
     __tablename__ = 'variants_users'
-    id = Column(Integer,primary_key=True)
+    id = Column(Integer,primary_key=True, autoincrement=True)
     id_variant = Column(Integer, ForeignKey('variants.id'), nullable=False)
     id_user = Column(Integer, ForeignKey('users.id'), nullable=False)
     variant = relationship("Variant", backref="related_users")

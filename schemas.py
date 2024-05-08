@@ -139,3 +139,24 @@ class Engine(EngineBase):
     class Config:
         orm_mode = True
 
+class VariantUserBase(BaseModel):
+    # id: Optional[int]
+    id_user:int
+    id_variant:int
+
+
+class VariantUserCreate(VariantUserBase):
+    # id: Optional[int]
+    id_user: int
+    id_variant: int
+
+
+class VariantUser(VariantUserBase):
+    id: Optional[int]
+    id_user: int
+    id_variant: int
+    vars_initial_data: List[VarInitialData] = []
+
+    class Config:
+        orm_mode = True
+

@@ -10,6 +10,7 @@ from engine.router import router as router_engine
 from variant.router import router as router_variant
 from formula.router import router as router_formula
 from characteristic.router import router as router_characteristic
+from ref_tables.router import router as router_variant_user
 
 Base.metadata.create_all(bind=engine)
 
@@ -20,6 +21,7 @@ app.include_router(router_engine)
 app.include_router(router_variant)
 app.include_router(router_formula)
 app.include_router(router_characteristic)
+app.include_router(router_variant_user)
 
 
 
