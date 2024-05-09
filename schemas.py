@@ -155,7 +155,7 @@ class VariantUserCreate(VariantUserBase):
 
 
 class VariantUser(VariantUserBase):
-    # id: Optional[int]
+    id: int
     id_user: int
     id_variant: int
     vars_initial_data: List[VarInitialData] = []
