@@ -13,4 +13,4 @@ class User(database.Base):
     password = Column(String, nullable=False)
     user_group = Column(String(20))
     role = Column(String(10))
-    variants = relationship("Variant", secondary="variants_users", back_populates="users")
+    variants_user = relationship("VariantUser", back_populates="user")

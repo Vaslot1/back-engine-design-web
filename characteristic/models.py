@@ -11,3 +11,4 @@ class Characteristic(database.Base):
     name = Column(String(200), nullable=False)
     engine_id = Column(Integer, ForeignKey('engines.id'), nullable=False)
     formulas = relationship("Formula", back_populates="characteristic")
+    engine = relationship("Engine", back_populates="characteristics")

@@ -15,7 +15,7 @@ def get_variants(db: Session, skip: int = 0, limit: int = 100):
 def create_variant(db: Session, variant: schemas.VariantCreate):
     db_variant= models.Variant(voltage=variant.voltage, power=variant.power, cnt_pole=variant.cnt_pole,
                                solved=variant.solved, slide=variant.slide, class_hr=variant.class_hr,
-                               engine=variant.engine)
+                               engine_id=variant.engine_id)
     db.add(db_variant)
     db.commit()
     db.refresh(db_variant)

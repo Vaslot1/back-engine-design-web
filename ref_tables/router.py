@@ -15,7 +15,7 @@ def create_variant_user(variant_user: schemas.VariantUserCreate, db: Session = D
     db_variant_user = controller.get_variant_user_by_id_user_variant(db, id_user=variant_user.id_user,
                                                                id_variant=variant_user.id_variant)
     if db_variant_user:
-        raise HTTPException(status_code=400, detail="short_name already registered")
+        raise HTTPException(status_code=400, detail=f"short_name already registered {variant_user.id_user} and {variant_user.id_variant} = {db_variant_user.id}")
     db_variant_user = controller.create_variant_user(db=db, variant_user=variant_user)
     db_formulas = controller.get_string_res_by_variant_id(db, id_variant=variant_user.id_variant)
     controller.create_vars_initial_data_from_formulas(db,db_formulas,db_variant_user.id)

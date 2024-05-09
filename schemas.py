@@ -26,40 +26,12 @@ class UserCreate(UserBase):
 
 class User(UserBase):
     id: int
-    variants: List['Variant'] = deferred([])
+    variants_user: List['VariantUser'] = deferred([])
 
     class Config:
         orm_mode = True
 
-#######################################################Variant
-class VariantBase(BaseModel):
-    voltage: Optional[float] = None
-    power: Optional[float] = None
-    cnt_pole: Optional[int] = None
-    solved: Optional[bool] = None
-    slide: Optional[float] = None
-    class_hr: Optional[str] = None
-    engine_id: Optional[int] = None
 
-
-class VariantCreate(VariantBase):
-    voltage: Optional[float] = None
-    power: Optional[float] = None
-    cnt_pole: Optional[int] = None
-    solved: Optional[bool] = None
-    slide: Optional[float] = None
-    class_hr: Optional[str] = None
-    engine: Optional[int] = None
-
-
-class Variant(VariantBase):
-    id: int
-    engine_obj: 'Engine'
-    users: List[User] = []
-    vars_initial_data: List['VarInitialData'] = None
-
-    class Config:
-        orm_mode = True
 #######################################################Formula
 class FormulaBase(BaseModel):
     string_res: Optional[str] = None
@@ -86,19 +58,19 @@ class Formula(FormulaBase):
 #######################################################Variable
 class VarInitialDataBase(BaseModel):
     short_name: str
-    value: float
+    value: Optional[float] = None
     id_variant_user: int
 
 
 class VarInitialDataCreate(VarInitialDataBase):
     short_name: str
-    value: float
+    value: Optional[float] = None
     id_variant_user: int
 
 
 class VarInitialData(VarInitialDataBase):
     id: int
-    value: float
+    value: Optional[float] = None
     id_variant_user: int
 
 
@@ -139,6 +111,37 @@ class Engine(EngineBase):
     class Config:
         orm_mode = True
 
+
+#######################################################Variant
+class VariantBase(BaseModel):
+    voltage: Optional[float] = None
+    power: Optional[float] = None
+    cnt_pole: Optional[int] = None
+    solved: Optional[bool] = None
+    slide: Optional[float] = None
+    class_hr: Optional[str] = None
+    engine_id: Optional[int] = None
+
+
+class VariantCreate(VariantBase):
+    voltage: Optional[float] = None
+    power: Optional[float] = None
+    cnt_pole: Optional[int] = None
+    solved: Optional[bool] = None
+    slide: Optional[float] = None
+    class_hr: Optional[str] = None
+    engine_id: Optional[int] = None
+
+
+class Variant(VariantBase):
+    id: int
+    engine_obj: Optional[Engine]
+    users: List[User] = []
+    vars_initial_data: List[VarInitialData] = []
+
+    class Config:
+        orm_mode = True
+
 class VariantUserBase(BaseModel):
     # id: Optional[int]
     id_user:int
@@ -152,7 +155,7 @@ class VariantUserCreate(VariantUserBase):
 
 
 class VariantUser(VariantUserBase):
-    id: Optional[int]
+    # id: Optional[int]
     id_user: int
     id_variant: int
     vars_initial_data: List[VarInitialData] = []

@@ -8,7 +8,7 @@ import ref_tables.models as models
 from formula.models import Formula
 from variant.models import Variant
 from characteristic.models import Characteristic
-from var_initial_data.models import Var_initial_data
+from var_initial_data.models import VarInitialData
 import schemas
 
 
@@ -17,8 +17,8 @@ def get_variant_user(db: Session, id: int):
 
 
 def get_variant_user_by_id_user_variant(db: Session, id_user: int, id_variant: int):
-    return db.query(models.VariantUser).filter(models.VariantUser.id_user == id_user
-                                               and models.VariantUser.id_variant == id_variant).first()
+    return (db.query(models.VariantUser).filter(models.VariantUser.id_user == id_user)
+            .filter(models.VariantUser.id_variant == id_variant).first())
 
 
 def get_variants_users(db: Session, skip: int = 0, limit: int = 100):
@@ -41,7 +41,7 @@ def get_string_res_by_variant_id(db: Session, id_variant: int):
     return (
         db.query(Formula)
         .join(Characteristic)
-        .filter(Characteristic.engine_id == Variant.engine)
+        .filter(Characteristic.engine_id == Variant.engine_id)
         .filter(Characteristic.formulas.any(Formula.id_char == Characteristic.id))
         .filter(Variant.id == id_variant)
         .all()
@@ -59,13 +59,13 @@ def create_vars_initial_data_from_formulas(db: Session, formulas: List[Formula],
     initial_variables = set()
 
     for item in formulas:
-        string_res = item["string_res"]
+        string_res = item.string_res
         func, equals = extract_variables_from_expression(string_res)
         calculated_variables.add(func)
         initial_variables.update(equals - calculated_variables)
 
     for var in initial_variables:
-        db_VarInitialData = Var_initial_data(short_name=var, value=None,
+        db_VarInitialData = VarInitialData(short_name=var, value=None,
                                                     id_variant_user=id_variant_user)
         db.add(db_VarInitialData)
         db.commit()

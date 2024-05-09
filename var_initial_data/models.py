@@ -5,7 +5,7 @@ import database
 from ref_tables.models import *
 from variant.models import *
 
-class Var_initial_data(database.Base):
+class VarInitialData(database.Base):
     __tablename__ = 'vars_initial_data'
 
     id = Column(Integer, primary_key=True, autoincrement=True)

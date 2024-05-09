@@ -42,7 +42,7 @@ def upgrade():
         sa.Column('solved', sa.Boolean),
         sa.Column('slide', sa.Float),
         sa.Column('class_hr', sa.String(1)),
-        sa.Column('engine', sa.Integer, sa.ForeignKey('engines.id')),
+        sa.Column('engine_id', sa.Integer, sa.ForeignKey('engines.id')),
         sa.UniqueConstraint('id')
     )
     op.create_table(
