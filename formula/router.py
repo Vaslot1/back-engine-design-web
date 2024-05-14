@@ -10,7 +10,7 @@ from database import get_db
 router = APIRouter()
 
 
-@router.post("/formulas/", response_model=schemas.Formula)
+@router.post("/api/formulas/", response_model=schemas.Formula)
 def create_formula(formula: schemas.FormulaCreate, db: Session = Depends(get_db)):
     db_formula = controller.get_formula_by_string_res(db, string_res=formula.string_res)
     if db_formula:
@@ -18,13 +18,13 @@ def create_formula(formula: schemas.FormulaCreate, db: Session = Depends(get_db)
     return controller.create_formula(db=db, formula=formula)
 
 
-@router.get("/formulas/", response_model=List[schemas.Formula])
+@router.get("/api/formulas/", response_model=List[schemas.Formula])
 def read_formulas(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     formulas = controller.get_formulas(db, skip=skip, limit=limit)
     return formulas
 
 
-@router.get("/formulas/{id}", response_model=schemas.Formula)
+@router.get("/api/formulas/{id}", response_model=schemas.Formula)
 def read_formula(id: int, db: Session = Depends(get_db)):
     db_formula = controller.get_formula(db, id=id)
     if db_formula is None:

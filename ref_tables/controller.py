@@ -32,8 +32,6 @@ def create_variant_user(db: Session, variant_user: schemas.VariantUserCreate):
     db.refresh(db_variant_user)
     return db_variant_user
 
-def get_formulas_by_variant_id(db: Session):
-    return db.query(models.VariantUser).all()
 
 
 

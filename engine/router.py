@@ -8,7 +8,7 @@ from database import get_db
 router = APIRouter()
 
 
-@router.post("/engines/", response_model=schemas.Engine)
+@router.post("/api/engines/", response_model=schemas.Engine)
 def create_engine(engine: schemas.EngineCreate, db: Session = Depends(get_db)):
     db_engine = controller.get_engine_by_name(db, name=engine.name)
     if db_engine:
@@ -16,13 +16,13 @@ def create_engine(engine: schemas.EngineCreate, db: Session = Depends(get_db)):
     return controller.create_engine(db=db, engine=engine)
 
 
-@router.get("/engines/", response_model=List[schemas.Engine])
+@router.get("/api/engines/", response_model=List[schemas.Engine])
 def read_engines(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     engines = controller.get_engines(db, skip=skip, limit=limit)
     return engines
 
 
-@router.get("/engines/{id}", response_model=schemas.Engine)
+@router.get("/api/engines/{id}", response_model=schemas.Engine)
 def read_engine(id: int, db: Session = Depends(get_db)):
     db_engine = controller.get_engine(db, id=id)
     if db_engine is None:
